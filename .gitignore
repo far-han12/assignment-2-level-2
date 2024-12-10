@@ -1,0 +1,11 @@
+# Ignore environment variable files
+.env
+.env.local
+
+# Node modules
+node_modules/
+
+
+# Dist folder
+dist/
+build/
