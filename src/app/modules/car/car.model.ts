@@ -13,5 +13,7 @@ const carschema = new Schema<Tcar>({
         type:Boolean,
     default:false
       }
-})
-export const CarModel = mongoose.model('CarModel', carschema);
+} ,{ 
+    timestamps: true 
+  })
+export const CarModel = mongoose.model('Car', carschema);
