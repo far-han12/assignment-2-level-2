@@ -1,0 +1,12 @@
+import { Request, Response } from "express";
+import { CarModel } from "./car.model";
+import { Tcar } from "./car.interface";
+
+const createcarintodb = async(car:Tcar)=>{
+    const result = await CarModel.create(car)
+    return result
+}
+
+export const carservice ={
+    createcarintodb
+}
