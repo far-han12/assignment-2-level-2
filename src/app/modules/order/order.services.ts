@@ -5,7 +5,6 @@ import { OrderModel } from './order.model';
 const ordersintodb = async (order: Torder) => {
   const { car, quantity, email } = order;
   
-  // Step 1: Check if the car exists
   const carDetails = await CarModel.findById(car);
   if (!carDetails) {
     throw new Error('Car not found');
