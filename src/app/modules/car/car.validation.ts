@@ -21,7 +21,7 @@ const carschema = z.object({
       invalid_type_error: 'Year must be a number',
     })
     .int('Year must be an integer')
-    .min(1886, 'Year must be a valid year'), // Cars were invented around 1886
+    .min(1886, 'Year must be a valid year'), 
 
   price: z
     .number({

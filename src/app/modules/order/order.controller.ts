@@ -5,14 +5,12 @@ import { orderservice } from './order.services';
 
 const orderCarController = async (req: Request, res: Response) => {
   try {
-    // Validate request body using Zod
     const orderData = orderSchema.parse(req.body);
     // console.log(orderData);
 
-    // Call the service to process the order
     const result = await orderservice.ordersintodb(orderData);
 
-    res.status(201).json({
+    res.status(200).json({
       message: 'Order created successfully',
       status: true,
       data: result,

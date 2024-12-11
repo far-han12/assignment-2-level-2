@@ -3,24 +3,38 @@ import { Torder } from './order.interface';
 import { OrderModel } from './order.model';
 
 const ordersintodb = async (order: Torder) => {
-  const { car, quantity } = order;
+  const { car, quantity, email } = order;
+  
+  // Step 1: Check if the car exists
   const carDetails = await CarModel.findById(car);
   if (!carDetails) {
     throw new Error('Car not found');
   }
 
+
   if (carDetails.quantity < quantity) {
-    throw new Error(
-      `Insufficient stock. Only ${carDetails.quantity} cars available.`,
-    );
+    throw new Error(`Insufficient stock. Only ${carDetails.quantity} cars available.`);
   }
 
-  // Step 2: Reduce car quantity and update inStock flag
+ 
+  const totalPrice = carDetails.price * quantity;
+
+  
   carDetails.quantity -= quantity;
   carDetails.inStock = carDetails.quantity > 0;
-  const result = await OrderModel.create(order);
+  await carDetails.save();
+
+  const orderData = {
+    ...order, 
+    totalPrice 
+  };
+
+
+  const result = await OrderModel.create(orderData);
   return result;
 };
+
+
 const orderrevenueintodb = async () => {
   const revenueData = await OrderModel.aggregate([
     {
