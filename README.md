@@ -9,11 +9,6 @@ The **Car-Store B4A2V3** is a  back-end application builted by using **TypeScrip
 [Live-Link](https://assignment-2-iota-snowy.vercel.app/)
 --
 
-## **Video Explanation-Link**
-
-[Video-Link]()
---
-
 
 ## **Features**
 1. **Car Management**: Create, Read, Update, and Delete (CRUD) operations for cars.
