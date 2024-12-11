@@ -9,3 +9,4 @@ node_modules/
 # Dist folder
 dist/
 build/
+.vercel

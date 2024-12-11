@@ -6,8 +6,13 @@ const app: Application = express();
 
 app.use(express.json());
 app.use(cors());
-app.use("/api",carrouter)
+app.use('/api', carrouter);
 app.use('/api', orderrouter);
-
+app.get('/', (req: Request, res: Response) => {
+    res.send({
+      status: true,
+      message: 'Car Server is Running',
+    });
+  });
 
 export default app;
