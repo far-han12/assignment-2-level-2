@@ -20,11 +20,11 @@ const deleteacarfromdb = async(carId:string )=>{
     const result = await CarModel.findOneAndDelete({_id:carId})
     return result
 }
-const updatecarfromdb = async(carId:string)=>{
-    const result = await CarModel.findByIdAndUpdate(carId)
+const updatecarfromdb = async(carId:string,updatedata :Partial<Tcar>)=>{
+    const result = await CarModel.findByIdAndUpdate(carId,updatedata,{ new: true, runValidators: true } )
     return result
 }
 export const carservice ={
-    createcarintodb,getallcarsfromdb,getsinglecarfromdb, deleteacarfromdb
+    createcarintodb,getallcarsfromdb,getsinglecarfromdb, deleteacarfromdb,updatecarfromdb
 }
 
