@@ -6,7 +6,6 @@ The **Car-Store B4A2V3** is a  back-end application builted by using **TypeScrip
 
 ## **Project Live-Link**
 
---
 [Live-Link](https://assignment-2-iota-snowy.vercel.app/)
 --
 
