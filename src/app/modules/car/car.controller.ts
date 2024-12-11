@@ -24,9 +24,10 @@ res.status(200).json({
   }
 }
 
-const getcarcontroller = async (req: Request, res: Response): Promise<void> => {
+const getcarcontroller = async (req: Request, res: Response) => {
     try {
       const { searchTerm } = req.query;
+      console.log(searchTerm);
   
       let result;
       if (searchTerm) {
