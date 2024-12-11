@@ -51,9 +51,9 @@ The **Car-Store B4A2V3** is a  back-end application builted by using **TypeScrip
 
 3. **Set up environment variables** (see [Environment Variables](#environment-variables) section for details)
 
-4. **Run the development server**
+4. **Run the server locally**
    ```bash
-   ts-node-dev --respawn --transpile-only .\src\server.ts
+   npm run start:dev
    ```
    The server will be available at `http://localhost:5000/`.
 
@@ -81,7 +81,7 @@ Replace `<your-mongo-connection-string>` with your MongoDB URL.
 ### **Car Endpoints**
 
 1. **Create a Car**
-   - **Endpoint:** `/api/cars`
+   - **Endpoint:** `https://assignment-2-iota-snowy.vercel.app/api/cars`
    - **Method:** `POST`
    - **Request Body:**
      ```json
@@ -99,22 +99,22 @@ Replace `<your-mongo-connection-string>` with your MongoDB URL.
    - **Response:** Returns a success message and the created car.
 
 2. **Get All Cars**
-   - **Endpoint:** `/api/cars`
+   - **Endpoint:** `https://assignment-2-iota-snowy.vercel.app/api/cars`
    - **Method:** `GET`
    - **Query:** Filter cars by brand, model, or category.
 
 3. **Get a Specific Car**
-   - **Endpoint:** `/api/cars/:carId`
+   - **Endpoint:** `https://assignment-2-iota-snowy.vercel.app/api/cars/:carId`
    - **Method:** `GET`
    - **Response:** Returns details of a specific car.
 
 4. **Update a Car**
-   - **Endpoint:** `/api/cars/:carId`
+   - **Endpoint:** `https://assignment-2-iota-snowy.vercel.app/api/cars/:carId`
    - **Method:** `PUT`
    - **Request Body:** (fields to update, e.g., price or quantity)
 
 5. **Delete a Car**
-   - **Endpoint:** `/api/cars/:carId`
+   - **Endpoint:** `https://assignment-2-iota-snowy.vercel.app/api/cars/:carId`
    - **Method:** `DELETE`
 
 ---
@@ -122,7 +122,7 @@ Replace `<your-mongo-connection-string>` with your MongoDB URL.
 ### **Order Endpoints**
 
 1. **Create an Order**
-   - **Endpoint:** `/api/orders`
+   - **Endpoint:** `https://assignment-2-iota-snowy.vercel.app/api/orders`
    - **Method:** `POST`
    - **Request Body:**
      ```json
@@ -135,10 +135,24 @@ Replace `<your-mongo-connection-string>` with your MongoDB URL.
      ```
    - **Response:** Returns a success message and the created order.
 
-2. **Calculate Total Revenue**
-   - **Endpoint:** `/api/orders/revenue`
-   - **Method:** `GET`
-   - **Response:** Returns the total revenue from all orders.
+2. **Revenue Calculation**
+The total revenue is calculated using the following aggregation:
+```javascript
+Order.aggregate([
+  { $group: { _id: null, totalRevenue: { $sum: "$totalPrice" } } }
+])
+```
+**Endpoint:** `https://assignment-2-iota-snowy.vercel.app/api/orders/revenue`
+**Response:**
+```json
+{
+  "message": "Revenue calculated successfully",
+  "status": true,
+  "data": {
+    "totalRevenue": 810000
+  }
+}
+```
 
 ---
 
@@ -167,23 +181,6 @@ All errors are handled using a consistent JSON response format:
 
 ---
 
-## **Revenue Calculation**
-The total revenue is calculated using the following aggregation:
-```javascript
-Order.aggregate([
-  { $group: { _id: null, totalRevenue: { $sum: "$totalPrice" } } }
-])
-```
-**Endpoint:** `/api/orders/revenue`
-**Response:**
-```json
-{
-  "message": "Revenue calculated successfully",
-  "status": true,
-  "data": {
-    "totalRevenue": 810000
-  }
-}
-```
+
 
 
