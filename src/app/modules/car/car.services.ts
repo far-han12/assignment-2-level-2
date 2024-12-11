@@ -24,7 +24,18 @@ const updatecarfromdb = async(carId:string,updatedata :Partial<Tcar>)=>{
     const result = await CarModel.findByIdAndUpdate(carId,updatedata,{ new: true, runValidators: true } )
     return result
 }
+const searchcarfromdb = async(searchTerm:string)=>{
+    const result = await CarModel.find({
+        $or: [
+          { brand: { $regex: searchTerm, $options: 'i' } },
+          { model: { $regex: searchTerm, $options: 'i' } },
+          { category: { $regex: searchTerm, $options: 'i' } },
+        ],
+      });
+      return result;
+
+}
 export const carservice ={
-    createcarintodb,getallcarsfromdb,getsinglecarfromdb, deleteacarfromdb,updatecarfromdb
+    createcarintodb,getallcarsfromdb,getsinglecarfromdb, deleteacarfromdb,updatecarfromdb,searchcarfromdb
 }
 

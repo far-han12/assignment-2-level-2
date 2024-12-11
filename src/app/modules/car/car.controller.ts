@@ -24,24 +24,41 @@ res.status(200).json({
   }
 }
 
-const getcarcontroller = async(req:Request,res:Response)=>{
-    try{
-        const result = await carservice.getallcarsfromdb()
+const getcarcontroller = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { searchTerm } = req.query;
+  
+      let result;
+      if (searchTerm) {
+        result = await carservice.searchcarfromdb(
+          searchTerm as string,
+        );
+      } else {
+        result = await carservice.getallcarsfromdb();
+      }
+  
+      if (result.length === 0) {
+        res.status(404).json({
+          message: 'No Cars found',
+          status: true,
+          data: [],
+        });
+      } else {
         res.status(200).json({
-    
-            message: 'Cars retrieved successfully',
-            success: true,
-            data: result, 
-          });
-    }  catch (error:any) {
-        console.log(error);
-        res.status(500).json({
-          success: false,
-          message:error.message || 'Failed to retrieved car',
-          error: error,
+          message: 'Cars retrieved successfully',
+          status: true,
+          data: result,
         });
       }
-}
+    } catch (error: any) {
+      res.status(500).json({
+       
+        status: false,
+        message:error.message || 'Failed to retrieved car',
+       error:error
+      });
+    }
+  };
 const getsinglecarcontroller = async(req:Request,res:Response)=>{
   try{
     const {carId} = req.params
