@@ -31,11 +31,6 @@ The **Car-Store B4A2V3** is a  back-end application builted by using **TypeScrip
 
 ## **Installation and Setup**
 
-### **Prerequisites**
-- **Node.js** (v16 or higher)
-- **MongoDB** (local or cloud-based, e.g., MongoDB Atlas)
-- **TypeScript** (for development purposes)
-
 ### **Installation**
 
 1. **Clone the repository**
